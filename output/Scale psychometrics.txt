@@ -1,0 +1,18 @@
+Cronbach alpha for 7-point scales:
+      ID D3_CareerSE F13_LifeSat F14a_CarSucc
+alpha  1       0.697       0.887        0.842
+
+
+Number of items in 7-point scales:
+
+
+Cronbach alpha for 5-point scales:
+      ID C2_WLB D1_PersCirc D2_Abilities E1_CultFit E2_Network E3_Mentor E4_CarMgt E5_DevAsst
+alpha  1  0.774        0.63        0.866      0.869      0.854     0.875     0.859      0.919
+      E6_GeoMob F2_MngCar F3_Relships F4_Mentor F5_DevAss F6_ProcJust F7_DistJust F8_Empower F9_DevAss
+alpha     0.803     0.823       0.818     0.942     0.895       0.752       0.813      0.805     0.872
+      F10_Turnover F11_JobSat F12_CareerSat
+alpha        0.939      0.871         0.878
+
+
+Number of items in 5-point scales:
