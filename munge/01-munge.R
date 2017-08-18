@@ -25,18 +25,27 @@
 # Prob others can be dropped - ResponseSet etc.
 
 responses <- responses %>% 
-        select(-starts_with("X")) %>% 
-        select(-ends_with("D1_7_Barrier")) %>% 
-        select(-ends_with("C5_8_CarAdv")) %>% 
-        select(-ends_with("E6_8_GeogMob")) %>% 
-        select(-ends_with("H1_8_OrgFacil")) %>% 
-		select(-H12_Email) %>%
-        filter(ResponseID != "R_3GvvOBTj4XHfyeM") %>% 
-        filter(ResponseID != "R_RKpGHXWPmVQx3Sp") %>% 
-        filter(ResponseID != "R_2sbE1CxaFo6uCCG") %>% 
-        mutate(TotDeps = Deps0_5 + Deps5_10 + Deps11_18 + Deps19_30 + 
+     select(-starts_with("X")) %>% 
+     select(-ends_with("D1_7_Barrier")) %>% 
+     select(-ends_with("C5_8_CarAdv")) %>% 
+     select(-ends_with("E6_8_GeogMob")) %>% 
+     select(-ends_with("H1_8_OrgFacil")) %>% 
+	 select(-H12_Email) %>%
+     filter(ResponseID != "R_3GvvOBTj4XHfyeM") %>% 
+     filter(ResponseID != "R_RKpGHXWPmVQx3Sp") %>% 
+     filter(ResponseID != "R_2sbE1CxaFo6uCCG") %>% 
+     mutate(TotDeps = Deps0_5 + Deps5_10 + Deps11_18 + Deps19_30 + 
                        DepsOther) %>% 
-        mutate(MinsTaken = (interval(StartDate, EndDate)) / dminutes(1))
+    mutate(MinsTaken = (interval(StartDate, EndDate)) / dminutes(1)) %>% 
+    mutate(C2_1_WLBr = 6 - C2_1_WLB) %>% 
+    mutate(C2_3_WLBr = 6 - C2_3_WLB) %>% 
+    mutate(C2_4_WLBr = 6 - C2_4_WLB) %>% 
+    mutate(C2_5_WLBr = 6 - C2_5_WLB) %>% 
+    mutate(F6_2_ProcJustr = 6 - F6_2_ProcJust) %>% 
+    mutate(F6_3_ProcJustr = 6 - F6_3_ProcJust) %>% 
+    mutate(F11_3_JobSatr = 6 - F11_3_JobSat) %>% 
+    mutate(F11_5_JobSatr = 6 - F11_5_JobSat)
+
 
 # Recode weird values in items - editing changes to Qualtrics survey
 # means that some scales had gaps (e.g., 1-4, 6 instead of 1-5)

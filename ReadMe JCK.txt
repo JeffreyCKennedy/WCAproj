@@ -5,10 +5,10 @@ ending with "TotSal_f".
 To run the analysis:
 If there have been no changes to the original csv data files, then:
 1.	Double click <WCAproj.Rproj> to open RStudio with correct working directory.
-2.	Launch ProjectTemplate with munging off:
+2.	Launch ProjectTemplate:
 		library(ProjectTemplate)
-		load.project(list(munging=FALSE))
-3.	This will load packages, load the data etc. Now ready to run analyses.
+		load.project()
+3.	This will load packages, load the data (responses dataframe in data folder), and run the files in munge to create scales etc. Now ready to run analyses.
 
 If there have been changes to the original csv data files, then:
 1.	Double click <WCAproj.Rproj> to open RStudio with correct working directory.

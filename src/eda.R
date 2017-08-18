@@ -16,7 +16,7 @@
 
 # Scale Reliabilities -----------------------------------------------------
 
-sink(file.path("output", "Scale psychometrics.txt")) # Send output to txt file in working directory
+sink(file.path("output", "Scale psychometrics.txt")) # Send output to txt file
 cat("Cronbach alpha for 7-point scales:\n")
 print(scores_7$alpha, digits = 3)
 cat("\n\nNumber of items in 7-point scales:\n")
