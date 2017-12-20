@@ -1,5 +1,5 @@
 Need to test following instructions - might need to run munging when starting a new
-session. Check vars with names(responses). After munging, should be 237 vars
+session. Check vars with names(responses). After munging, should be 245 vars
 ending with "TotSal_f".
 
 To run the analysis:

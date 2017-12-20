@@ -84,11 +84,11 @@ scores_5 <- scoreItems(keys.list_5, subset_responses_5, impute="none", min=1, ma
 responses <- dplyr::left_join(responses, as.data.frame(scores_5$scores), by = "ID")
 
 keys.list_7 <- list(ID=c("ID"), 
-                    D3_CareerSE = c("D3_1_Decn", "D3_2_Grow", "D3_4_Chall"),
+                    D3_CareerSE = c("D3_1_Decn", "D3_2_Grow", "D3_3_Probs", "D3_4_Chall"),
                     F13_LifeSat = c("F13_1_LifeSat", "F13_2_LifeSat", "F13_3_LifeSat", 
                                     "F13_4_LifeSat", "F13_5_LifeSat"),
                     F14a_CarSucc = c("F14a_1_CarSucc", "F14a_2_CarSucc", "F14a_3_CarSucc"))
-itemsused_7 <- c("ID", "D3_1_Decn", "D3_2_Grow", "D3_4_Chall",
+itemsused_7 <- c("ID", "D3_1_Decn", "D3_2_Grow", "D3_3_Probs", "D3_4_Chall",
                  "F13_1_LifeSat", "F13_2_LifeSat", "F13_3_LifeSat", "F13_4_LifeSat", 
                  "F13_5_LifeSat", "F14a_1_CarSucc", "F14a_2_CarSucc", "F14a_3_CarSucc")
 subset_responses_7 <- responses %>% dplyr::select(one_of(itemsused_7))

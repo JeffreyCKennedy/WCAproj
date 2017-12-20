@@ -36,15 +36,8 @@ responses <- responses %>%
      filter(ResponseID != "R_2sbE1CxaFo6uCCG") %>% 
      mutate(TotDeps = Deps0_5 + Deps5_10 + Deps11_18 + Deps19_30 + 
                        DepsOther) %>% 
-    mutate(MinsTaken = (interval(StartDate, EndDate)) / dminutes(1)) %>% 
-    mutate(C2_1_WLBr = 6 - C2_1_WLB) %>% 
-    mutate(C2_3_WLBr = 6 - C2_3_WLB) %>% 
-    mutate(C2_4_WLBr = 6 - C2_4_WLB) %>% 
-    mutate(C2_5_WLBr = 6 - C2_5_WLB) %>% 
-    mutate(F6_2_ProcJustr = 6 - F6_2_ProcJust) %>% 
-    mutate(F6_3_ProcJustr = 6 - F6_3_ProcJust) %>% 
-    mutate(F11_3_JobSatr = 6 - F11_3_JobSat) %>% 
-    mutate(F11_5_JobSatr = 6 - F11_5_JobSat)
+    mutate(MinsTaken = (interval(StartDate, EndDate)) / dminutes(1))
+
 
 
 # Recode weird values in items - editing changes to Qualtrics survey
@@ -69,6 +62,21 @@ responses$E4_3_CarMgt <- car::recode(responses$E4_3_CarMgt,"1=1 ; 2=2 ; 3=3 ; 4=
 responses$F14a_1_CarSucc <- car::recode(responses$F14a_1_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
 responses$F14a_2_CarSucc <- car::recode(responses$F14a_2_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
 responses$F14a_3_CarSucc <- car::recode(responses$F14a_3_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
+
+
+# Recode reverse scored variables -----------------------------------------
+
+# Note: need to this here, after the above recoding has been carried out.
+
+responses <- responses %>% 
+    mutate(C2_1_WLBr = 6 - C2_1_WLB) %>% 
+    mutate(C2_3_WLBr = 6 - C2_3_WLB) %>% 
+    mutate(C2_4_WLBr = 6 - C2_4_WLB) %>% 
+    mutate(C2_5_WLBr = 6 - C2_5_WLB) %>% 
+    mutate(F6_2_ProcJustr = 6 - F6_2_ProcJust) %>% 
+    mutate(F6_3_ProcJustr = 6 - F6_3_ProcJust) %>% 
+    mutate(F11_3_JobSatr = 6 - F11_3_JobSat) %>% 
+    mutate(F11_5_JobSatr = 6 - F11_5_JobSat)
 
 #### Create count of missing responses in numeric vars ###
 numericvars <- responses[sapply(responses,is.numeric)]
