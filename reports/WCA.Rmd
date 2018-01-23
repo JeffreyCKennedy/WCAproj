@@ -1,0 +1,545 @@
+---
+title: "Womens Career Aspirations"
+author: "Jeff Kennedy"
+date: "23 November 2016"
+output: word_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 3.5, fig.height = 3.5)
+```
+
+
+```
+## Missing data
+
+Leaving aside optional questions (e.g., open text responses), this plot shows the number of missing values by respondent. Vertical axis is the number of respondents corresponding to each level of missing data along the horizontal axis.
+```{r MissingValues, echo=FALSE}
+print(ggplot(responses, aes(Missing)) + geom_histogram(binwidth = 1))
+```
+
+## Q2 Importance of job, family, life/leisure
+
+Total sample boxplots for Question C1:
+C1 How would you rate the importance of the following to you?(0 - Not at all important; 100 - Extremely important)
+1. ______ Career/ Job (1)
+2. ______ Family/ Household (2)
+3. ______ Lifestyle/ Leisure (e.g., sport, church) (3)
+
+```{r C_1, echo=FALSE}
+boxplot(responses$C1_1_ImpJob,responses$C1_2_ImpFam, responses$C1_3_ImpLife, notch = T, 
+        names = c("Job", "Family", "Life"))
+```
+
+### Q2 Importance of job by demographics
+
+Following boxplots show ratings of job importance according to marital status:  1. (Married/Partnered)
+2. (Single)
+3. (Other)
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Marital_f, C1_1_ImpJob)) + geom_boxplot(aes(group = Marital_f), notch = F)
+```
+
+Following boxplots show ratings of job importance according to ethnicity:  
+1. NZ European
+2. Maori
+3. Asian
+4. Pacific peoples
+5. Middle Eastern/ Latin American/African
+6. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Ethnic_f, C1_1_ImpJob)) + geom_boxplot(aes(group = Ethnic_f), notch = F)
+```
+
+Following boxplots show ratings of job importance according to age group:  
+1. 15--24
+2. 25--34
+3. 35--44
+4. 45--54
+5. 55--64
+6. 65 & over
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Age, C1_1_ImpJob)) + geom_boxplot(aes(group = factor(Age)), notch = F)
+```
+
+Following boxplots show ratings of job importance according to job status:  
+1. Permanent
+2. Temp/Short Contract
+3. Self-employed
+4. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(JobStatus_f, C1_1_ImpJob)) + geom_boxplot(aes(group = JobStatus_f), notch = F)
+```
+
+
+### Q2 Importance of family by demographics
+
+Following boxplots show ratings of family importance according to marital status:  1. (Married/Partnered)
+2. (Single)
+3. (Other)
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Marital, C1_2_ImpFam)) + geom_boxplot(aes(group = factor(Marital)), notch = F)
+```
+
+Following boxplots show ratings of family importance according to ethnicity:  
+1. NZ European
+2. Maori
+3. Asian
+4. Pacific peoples
+5. Middle Eastern/ Latin American/African
+6. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Ethnic, C1_2_ImpFam)) + geom_boxplot(aes(group = factor(Ethnic)), notch = F)
+```
+
+Following boxplots show ratings of family importance according to age group:  
+1. 15--24
+2. 25--34
+3. 35--44
+4. 45--54
+5. 55--64
+6. 65 & over
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Age, C1_2_ImpFam)) + geom_boxplot(aes(group = factor(Age)), notch = F)
+```
+
+Following boxplots show ratings of family importance according to job status:  
+1. Permanent
+2. Temp/Short Contract
+3. Self-employed
+4. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(JobStatus, C1_2_ImpFam)) + geom_boxplot(aes(group = factor(JobStatus)), notch = F)
+```
+
+### Q2 Importance of life/leisure by demographics
+
+Following boxplots show ratings of life/leisure importance according to marital status:  1. (Married/Partnered)
+2. (Single)
+3. (Other)
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Marital, C1_3_ImpLife)) + geom_boxplot(aes(group = factor(Marital)), notch = F)
+```
+
+Following boxplots show ratings of life/leisure importance according to ethnicity:  
+1. NZ European
+2. Maori
+3. Asian
+4. Pacific peoples
+5. Middle Eastern/ Latin American/African
+6. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Ethnic, C1_3_ImpLife)) + geom_boxplot(aes(group = factor(Ethnic)), notch = F)
+```
+
+Following boxplots show ratings of life/leisure importance according to age group:  
+1. 15--24
+2. 25--34
+3. 35--44
+4. 45--54
+5. 55--64
+6. 65 & over
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Age, C1_3_ImpLife)) + geom_boxplot(aes(group = factor(Age)), notch = F)
+```
+
+Following boxplots show ratings of life/leisure importance according to job status:  
+1. Permanent
+2. Temp/Short Contract
+3. Self-employed
+4. Other
+
+
+```{r, echo=FALSE}
+ggplot(responses, aes(JobStatus, C1_3_ImpLife)) + geom_boxplot(aes(group = factor(JobStatus)), notch = F)
+```
+
+### Number of dependents
+Apart from one respondent with 8 dependents, the total number of dependents reported 
+ranged from 0 to 5, with the following frequencies (0 to 5, and 8 dependents respectively):
+ ```{r, echo = FALSE}
+table(responses$TotDeps)
+```
+
+ 
+ ```{r, echo=FALSE}
+ ggplot(responses, aes(TotDeps)) + geom_histogram(binwidth = 1)
+ ```
+
+## Job, Career, and Life Satisfaction
+
+### Job Satisfaction by Seniority
+
+1. Directorship/board member (1)
+2. Executive management (2)
+3. Senior management (3)
+4. Middle management (4)
+5. First-level management (5)
+6. Supervisory level (6)
+7. Other
+8. No management/supervision responsibility (8)
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Seniority, F11_JobSat)) + geom_boxplot(aes(group = factor(Seniority)), notch = T)
+```
+
+### Career Satisfaction by Seniority
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Seniority, F12_CareerSat)) + geom_boxplot(aes(group = factor(Seniority)), notch = T)
+```
+
+### Job Satisfaction by Education
+
+1. PhD (1)
+2. Master's degree (2)
+3. Postgraduate diploma/ certificate (3)
+4. Bachelor's degree (4)
+5. Diploma/certificate (5)
+6. High school qualification(s) (6)
+7. Other
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Educ, F11_JobSat)) + geom_boxplot(aes(group = factor(Educ)), notch = F)
+```
+
+### Career Satisfaction by Education
+
+```{r, echo=FALSE}
+ggplot(responses, aes(Educ, F12_CareerSat)) + geom_boxplot(aes(group = factor(Educ)), notch = F)
+```
+ 
+ 
+## Predictors of Turnover Intentions
+
+Turnover intentions are related to perceived barriers to advancement (Section E) 
+as follows. Hierarchical regresssion (e.g,. adding in controls like age and 
+education) probably needed to get a more accurate picture. 
+ 
+ 
+```{r, echo = FALSE}
+ reg1 <- lm(F10_Turnover ~ E1_CultFit + E2_Network + E3_Mentor + E4_CarMgt +
+ E5_DevAsst + E6_GeoMob, responses)
+kable(summary(reg1)$coef, digits=2)
+```
+ 
+## Correlations between turnover and E1 to E6
+ 
+First table shows correlation, second table shows p value.
+ 
+```{r, echo = FALSE}
+ tover1 <- responses %>% select(one_of(c("E1_CultFit", "E2_Network", "E3_Mentor" , 
+                                   "E4_CarMgt", "E5_DevAsst", "E6_GeoMob", "F10_Turnover")))
+cout1 <- corr.test(tover1)
+kable(cout1$r, digits=2)
+kable(cout1$p, digits=3)
+```
+
+## Correlations between turnover and F2 to F9
+ 
+Turnover intentions are related to perceived facilitators of advancement 
+(Section F, items F2 to F9) 
+as follows. Hierarchical regresssion (e.g,. adding in controls like age and 
+education) probably needed to get a more accurate picture. 
+
+ 
+```{r, echo = FALSE}
+ reg2 <- lm(F10_Turnover ~ F2_MngCar + F3_Relships + F4_Mentor + F5_DevAss +
+ F6_ProcJust + F7_DistJust + F8_Empower + F9_DevAss, responses)
+kable(summary(reg2)$coef, digits=2)
+```
+ 
+## Correlations between turnover and F2 to F9
+  
+First table shows correlation, second table shows p value.
+  
+```{r, echo = FALSE}
+tover2 <- responses %>% select(one_of(c("F2_MngCar", "F3_Relships", "F4_Mentor" , 
+                                   "F5_DevAss", "F6_ProcJust", "F7_DistJust", 
+                                   "F8_Empower", "F9_DevAss", "F10_Turnover")))
+cout2 <- corr.test(tover2)
+kable(cout2$r, digits=2)
+kable(cout2$p, digits=3)
+```
+
+
+## Career Satisfaction regressed on perceptions (Section D)
+  
+```{r, echo = FALSE}
+reg3 <- lm(F12_CareerSat ~ D1_PersCirc + D2_Abilities + D3_CareerSE, responses)
+kable(summary(reg3)$coef, digits=2)
+```
+
+### Playing with more graphs
+## Show relationship between Turnover and Distrib Justice
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+ggplot(responses, aes(F7_DistJust, F10_Turnover)) + geom_point() + geom_smooth()
+```
+
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+with(responses, 
+smoothScatter(F7_DistJust, F10_Turnover, main="smoothScatter Kabacoff p. 262"))
+```
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+ggplot(responses, aes(D3_CareerSE, F10_Turnover)) + geom_point() + geom_smooth()
+```
+
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+with(responses, 
+smoothScatter(D3_CareerSE, F10_Turnover, main="smoothScatter Kabacoff p. 262"))
+```
+
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+ggplot(responses, aes(D1_PersCirc, F12_CareerSat)) + geom_point() + geom_smooth()
+```
+
+
+```{r, echo=FALSE, fig.width = 4.5, fig.height = 4.5}
+with(responses, 
+smoothScatter(D1_PersCirc, F12_CareerSat, main="smoothScatter Kabacoff p. 262"))
+```
+
+## More graphs, using ggplot
+
+```{r, echo=FALSE}
+responses %>% filter(Marital %in% c(1, 2)) %>% 
+        ggplot(aes(C1_1_ImpJob, fill = factor(TotDeps))) + 
+        geom_histogram(binwidth = 10) +
+        facet_wrap(~Marital_f, ncol = 1) +
+        xlab("Importance of Job for Married and Single")
+
+responses %>% filter(Marital %in% c(1, 2)) %>% 
+        ggplot(aes(C1_2_ImpFam, fill = factor(TotDeps))) + 
+        geom_histogram(binwidth = 10) +
+        facet_wrap(~Marital_f, ncol = 1) +
+        xlab("Importance of Family for Married and Single")
+
+responses %>% filter(Marital %in% c(1, 2)) %>% 
+        ggplot(aes(C1_3_ImpLife, fill = factor(TotDeps))) + 
+        geom_histogram(binwidth = 10) +
+        facet_wrap(~Marital_f, ncol = 1) +
+        xlab("Importance of Life/Leisure for Married and Single")
+
+responses %>% filter(Marital_f %in% c("Married", "Single")) %>% 
+        ggplot(aes(Seniority, group = Seniority_f)) + 
+        geom_histogram(binwidth = 1) +
+        facet_wrap(~Marital_f, ncol = 1) +
+        xlab("Seniority")
+
+ggplot(responses, aes(F10_Turnover, fill = Seniority_f)) + 
+        geom_histogram(binwidth = 1) +
+        xlab("Turnover Intention")
+
+
+```
+Following two graphs use geom_text to label the bars with counts.
+Could also do percent.
+``` {r, echo=FALSE}
+
+responses %>% filter(!is.na(Age_f)) %>% 
+        ggplot(aes(Age_f)) +
+        geom_bar(stat = "count", fill = "steelblue") +
+        xlab("Age Distribution") +
+        ylab("Frequency") +
+        geom_text(aes(label = ..count..), stat = "count", vjust=1.6, color="white", size=3.5)
+        
+responses %>% filter(!is.na(Age_f)) %>% 
+        ggplot(aes(Age_f), fill = "steelblue") +
+        geom_bar(stat = "count", fill = "steelblue") +
+        xlab("Age Distribution") +
+        ylab("Frequency") +
+        geom_text(aes(label = ..count..), stat= "count", vjust = -.5)
+        
+responses %>% filter(!is.na(Ethnic_f)) %>% 
+        ggplot(aes(Ethnic_f), fill = "steelblue") +
+        geom_bar(stat = "count", fill = "steelblue") +
+        xlab("Ethnicity") +
+        ylab("Frequency") +
+        geom_text(aes(label = ..count..), stat= "count", vjust = -.5)
+
+```
+
+Following tables summarise N and percentages in demographic categories. 
+
+```{r, echo=FALSE}
+
+mytable <- table(responses$Marital, responses$Seniority)
+row.names(mytable) <- c("Married", "Single", "Other")
+knitr::kable(mytable, col.names = 
+                     c("Director", "Executive", "Senior Mgt", "Middle Mgt", 
+                       "First-Level Mgt", "Supervisor", "Other", "No Mgt Resp"))
+
+MaritalSum <- responses %>% filter(!is.na(Marital_f)) %>%
+        group_by(Marital_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$Marital_f))),1))
+knitr::kable(MaritalSum, col.names = c("Marital Status", "N", "Pct"))
+
+EthnicSum <- responses %>% filter(!is.na(Ethnic_f)) %>%
+        group_by(Ethnic_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$Ethnic_f))),1))
+knitr::kable(EthnicSum, col.names = c("Ethnicity", "N", "Pct"))
+
+JobStatusSum <- responses %>% filter(!is.na(JobStatus_f)) %>%
+        group_by(JobStatus_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$JobStatus_f))),1))
+knitr::kable(JobStatusSum, col.names = c("Job Status", "N", "Pct"))
+
+SenioritySum <- responses %>% filter(!is.na(Seniority_f)) %>%
+        group_by(Seniority_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$Seniority_f))),1))
+knitr::kable(SenioritySum, col.names = c("Job Seniority", "N", "Pct"))
+
+AgeSum <- responses %>% filter(!is.na(Age_f)) %>%
+        group_by(Age_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$Age_f))),1))
+knitr::kable(AgeSum, col.names = c("Age Range", "N", "Pct"))
+
+EducSum <- responses %>% filter(!is.na(Educ_f)) %>%
+        group_by(Educ_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$Educ_f))),1))
+knitr::kable(EducSum, col.names = c("Education", "N", "Pct"))
+
+C6_PrimCareRespSum <- responses %>% filter(!is.na(C6_PrimCareResp_f)) %>%
+        group_by(C6_PrimCareResp_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$C6_PrimCareResp_f))),1))
+knitr::kable(C6_PrimCareRespSum, col.names = c("Primary Carer", "N", "Pct"))
+
+C7_PrimRespHHoldSum <- responses %>% filter(!is.na(C7_PrimRespHHold_f)) %>%
+        group_by(C7_PrimRespHHold_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$C7_PrimRespHHold_f))),1))
+knitr::kable(C7_PrimRespHHoldSum, col.names = c("Primary Household", "N", "Pct"))
+
+TotSalSum <- responses %>% filter(!is.na(TotSal_f)) %>%
+        group_by(TotSal_f) %>% 
+        summarise(n(), pct = round(100*(n()/sum(!is.na(responses$TotSal_f))),1))
+knitr::kable(TotSalSum, col.names = c("Salary Range", "N", "Pct"))
+
+```
+
+### Response Times
+26 respondents spent less than 1 minute on the survey, and 138 people spent 10 minutes or less. 
+Longest time taken was a little over 200 hours.
+Can change 'filter' value in first chunk to get shorter or longer times. Could probably create
+a function of this code to make it simpler. fast is used to filter responses from the dataset e.g., to filter subset to 
+calculate means of variables for short finishers versus total sample. 
+
+```{r, echo=FALSE}
+
+ShortTime <- responses %>% 
+        select(ResponseID, Source, Missing, MinsTaken) %>% 
+        arrange(MinsTaken) %>% 
+        filter(MinsTaken <= 30) 
+
+fast <- ShortTime$ResponseID
+
+testx <- responses %>% filter(ResponseID %in% fast)
+```
+### Following graph shows number of missing against time taken (ShortTime filtered by MinsTaken - 30 is a good number to use)
+```{r, echo=FALSE}
+
+ggplot(ShortTime, aes(MinsTaken, Missing)) +
+        geom_point() +
+        geom_smooth(method=lm)
+```
+
+
+### Calculating correlations and regressions for Nazim.
+The code for calculating correlations and regressions is included in the rmd file 
+for completeness, though have set eval=FALSE. Have used sink() to send 
+output to a textfile but I don't think this will play well with rmd. Might have to 
+redo syntax to use kable to output the regression models and correlations if needed.
+
+```{r, eval=FALSE, echo=FALSE}
+
+
+sink(file = "Corrs_Reg_for_Nazim.txt")
+
+tocorver1 <- responses %>% select(one_of(c("F1_1_TrackRcd", "F2_MngCar", "F3_Relships", "F4_Mentor", "F5_DevAss", "F10_Turnover", "F11_JobSat", "F12_CareerSat", "F13_LifeSat")))
+corout1 <- corr.test(tocorver1)
+cat("\n\n")
+print(corout1)
+
+
+tocorver2 <- responses %>% select(one_of(c("F6_ProcJust", "F7_DistJust", "F8_Empower", "F9_DevAss", "F10_Turnover", "F11_JobSat", "F12_CareerSat", "F13_LifeSat")))
+corout2 <- corr.test(tocorver2)
+print(corout2)
+
+
+nreg41 <- lm(F10_Turnover ~ F1_1_TrackRcd + F2_MngCar + F3_Relships + F4_Mentor + F5_DevAss, responses)
+nreg42 <- lm(F11_JobSat ~ F1_1_TrackRcd + F2_MngCar + F3_Relships + F4_Mentor + F5_DevAss, responses)
+nreg43 <- lm(F12_CareerSat ~ F1_1_TrackRcd + F2_MngCar + F3_Relships + F4_Mentor + F5_DevAss, responses)
+nreg44 <- lm(F13_LifeSat ~ F1_1_TrackRcd + F2_MngCar + F3_Relships + F4_Mentor + F5_DevAss, responses)
+nreg45 <- lm(F10_Turnover ~ F6_ProcJust + F7_DistJust + F8_Empower + F9_DevAss, responses)
+nreg46 <- lm(F11_JobSat ~ F6_ProcJust + F7_DistJust + F8_Empower + F9_DevAss, responses)
+nreg47 <- lm(F12_CareerSat ~ F6_ProcJust + F7_DistJust + F8_Empower + F9_DevAss, responses)
+nreg48 <- lm(F13_LifeSat ~ F6_ProcJust + F7_DistJust + F8_Empower + F9_DevAss, responses)
+
+
+tocorver3 <- responses %>% select(one_of(c("D1_PersCirc", "D2_Abilities", "D3_CareerSE", "F10_Turnover", "F11_JobSat", "F12_CareerSat", "F13_LifeSat")))
+corout3 <- corr.test(tocorver3)
+print(corout3)
+
+
+tocorver4 <- responses %>% select(one_of(c("E1_CultFit", "E2_Network", "E3_Mentor", "E4_CarMgt", "E5_DevAsst", "E6_GeoMob", "F10_Turnover", "F11_JobSat", "F12_CareerSat", "F13_LifeSat")))
+corout4 <- corr.test(tocorver4)
+print(corout4)
+
+nreg51 <- lm(F10_Turnover ~ D1_PersCirc + D2_Abilities + D3_CareerSE, responses)
+nreg52 <- lm(F11_JobSat ~ D1_PersCirc + D2_Abilities + D3_CareerSE, responses)
+nreg53 <- lm(F12_CareerSat ~ D1_PersCirc + D2_Abilities + D3_CareerSE, responses)
+nreg54 <- lm(F13_LifeSat ~ D1_PersCirc + D2_Abilities + D3_CareerSE, responses)
+nreg55 <- lm(F10_Turnover ~ E1_CultFit + E2_Network + E3_Mentor + E4_CarMgt + E5_DevAsst + E6_GeoMob, responses)
+nreg56 <- lm(F11_JobSat ~ E1_CultFit + E2_Network + E3_Mentor + E4_CarMgt + E5_DevAsst + E6_GeoMob, responses)
+nreg57 <- lm(F12_CareerSat ~ E1_CultFit + E2_Network + E3_Mentor + E4_CarMgt + E5_DevAsst + E6_GeoMob, responses)
+nreg58 <- lm(F13_LifeSat ~ E1_CultFit + E2_Network + E3_Mentor + E4_CarMgt + E5_DevAsst + E6_GeoMob, responses)
+
+
+nreg61 <- lm(F10_Turnover ~ F11_JobSat + F12_CareerSat + F13_LifeSat, responses)
+nreg62 <- lm(F10_Turnover ~ F11_JobSat + F12_CareerSat + F13_LifeSat + F14a_CarSucc, responses)
+
+tocorver5 <- responses %>% select(one_of(c("F10_Turnover", "F11_JobSat", "F12_CareerSat", "F13_LifeSat", "F14a_CarSucc")))
+corout5 <- corr.test(tocorver5)
+print(corout5)
+
+
+list_reg <- list(nreg41, nreg42, nreg43, nreg44, nreg45, nreg46, nreg47, nreg48,
+                 nreg51, nreg52, nreg53, nreg54, nreg55, nreg56, nreg57, nreg58,
+                 nreg61, nreg62)
+
+for(i in 1:length(list_reg)) {
+        print(summary(list_reg[[i]]))
+        cat("Following table gives VIF values for each variable:\n")
+        print(vif(list_reg[[i]]))
+        cat("Following tests if SQRT(vif) > 2:\n")
+        print(sqrt(vif(list_reg[[i]])) > 2) # problem?
+        cat("\n\n")
+}
+
+sink()
+
+```
