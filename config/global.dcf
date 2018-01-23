@@ -3,7 +3,8 @@ cache_loading: FALSE
 munging: TRUE
 logging: FALSE
 load_libraries: TRUE
-libraries: psych, dplyr, readr, ggplot2, readxl, foreign, lme4, lavaan, lubridate, car
+libraries: psych, sjPlot, tidyverse, lubridate, haven, here, glue, stringr, 
+           readxl, sjmisc, foreign, lme4, lavaan, car
 as_factors: FALSE
 data_tables: FALSE
 recursive_loading: TRUE

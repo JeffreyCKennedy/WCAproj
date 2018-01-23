@@ -66,7 +66,10 @@ responses$F14a_3_CarSucc <- car::recode(responses$F14a_3_CarSucc,"1=1 ; 3=2 ; 4=
 
 # Recode reverse scored variables -----------------------------------------
 
-# Note: need to this here, after the above recoding has been carried out.
+# Note: need to do this here, after the above recoding has been carried out.
+# In future, consider naming original variable with suffix r, and dropping
+# the r for the recoded variable. Makes it easier to use 'ends_with' to select
+# subsets of variables.
 
 responses <- responses %>% 
     mutate(C2_1_WLBr = 6 - C2_1_WLB) %>% 

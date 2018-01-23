@@ -1,0 +1,50 @@
+---
+title: "Careers Output Doc"
+author: "Jeff Kennedy"
+date: "23 January 2018"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, include=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(psych)
+library(lubridate)
+library(haven)
+library(here)
+library(glue)
+library(stringr)
+library(readxl)
+library(sjmisc)
+library(foreign)
+library(lme4)
+library(lavaan)
+library(car)
+load("../data/responses.Rdata")
+source("../munge/01-munge.R")
+source("../munge/02-munge missing vals analysis.R")
+source("../munge/03-munge create scale scores.R")
+# knitr::knit_exit() for use in debugging, can move to different place in doc
+```
+
+The following tables use pairs.panels (first fig) and corPlot from psych package.
+
+```{r correlation_plots, echo = FALSE}
+splom.scales <- responses %>% 
+    select(one_of(c("E4_CarMgt", "E5_DevAsst", "F2_MngCar", "F5_DevAss", 
+                    "F6_ProcJust", "F7_DistJust", "F12_CareerSat")))
+
+
+pairs.panels(splom.scales)
+corPlot(splom.scales, main = "Correlations of Main Scales", pval = FALSE, 
+        numbers = TRUE)
+```
+
+
+

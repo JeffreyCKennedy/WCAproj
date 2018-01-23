@@ -4,7 +4,7 @@ ending with "TotSal_f".
 
 To run the analysis:
 If there have been no changes to the original csv data files, then:
-1.	Double click <WCAproj.Rproj> to open RStudio with correct working directory.
+1.	Double click <WCAproj.Rproj> to open RStudio with correct working directory or open project in RStudio.
 2.	Launch ProjectTemplate:
 		library(ProjectTemplate)
 		load.project()
