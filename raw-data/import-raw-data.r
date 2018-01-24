@@ -3,16 +3,8 @@
 # resulting dataframe in 'data'. From then on, when running load.project(),
 # the responses.Rdata is automatically loaded, ready for further analysis.
 
-
-# Start of script
-# Useful first command to load included packages and set options, 
-# but usually you don't want munging or data loading
-# at this stage:
-# rm(list = ls())
 library(ProjectTemplate); load.project(list(munging=FALSE, data_loading = FALSE))
 
-
-# names(df)  # lists all the variable names with column numbers, so can reference by number.
 folder <- file.path("raw-data")
 datafile1 <- "20170628_Womens_Careers_and_Aspirations.csv"
 datafile2 <- "20170628_Womens_Careers_and_Aspirations_2.csv"

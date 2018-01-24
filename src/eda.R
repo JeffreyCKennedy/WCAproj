@@ -9,6 +9,17 @@ splom.scales <- responses %>%
 pairs.panels(splom.scales)
 corPlot(splom.scales, numbers = TRUE)
 
+my_7_alpha <- round(as.data.frame(scores_7$alpha[,-1]), digits = 3)
+sjt.df(my_7_alpha, 
+       describe = FALSE, 
+       title = "Alpha for 7-point Scales", 
+       altr.row.col=TRUE,
+       hide.progress = TRUE)
+sjt.df(round(as.data.frame(scores_7$n.items[-1]), digits = 2), 
+       describe = FALSE, 
+       title = "Number of items in 7-point Scales", 
+       altr.row.col=TRUE,
+       hide.progress = TRUE)
 
 # Generate df with only numeric vars for Nazim (PLS) ----------------------
 

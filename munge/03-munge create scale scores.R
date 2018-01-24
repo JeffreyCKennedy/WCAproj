@@ -1,6 +1,11 @@
 
 # Create Scales -----------------------------------------------------------
 
+# This scale is formed by summing the number of actions respondent is
+# willing to take to advance career.
+responses <- responses %>% 
+    mutate(C5_CarAdv = rowSums(subset(responses, select=C5_1_CarAdv:C5_7_CarAdv)))
+
 # Need to create scales for 5-pt and 7-pt scales separately or else
 # recoding won't work.
 

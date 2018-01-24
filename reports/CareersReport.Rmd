@@ -32,12 +32,39 @@ source("../munge/02-munge missing vals analysis.R")
 source("../munge/03-munge create scale scores.R")
 # knitr::knit_exit() for use in debugging, can move to different place in doc
 ```
+### Descriptives for Career Facilitator Scales
+
+#### Cronbach alpha and number of items for 7-point scales:
+```{r, echo = FALSE}
+alpha_7 <- round(as.data.frame(scores_7$alpha[,-1]), 2)
+colnames(alpha_7)[colnames(alpha_7)=="scores_7$alpha[, -1]"] <- "alpha"
+sjt.df(alpha_7, 
+       describe = FALSE, 
+       title = "Alpha for 7-point Scales", 
+       altr.row.col=FALSE,
+       hide.progress = TRUE)
+n_items_7 <- round(as.data.frame(scores_7$n.items[-1]), digits = 2)
+colnames(n_items_7)[colnames(alpha_7)=="scores_7$n.items[-1]"] <- "n_items"
+sjt.df(n_items_7, 
+       describe = FALSE, 
+       title = "Number of items in 7-point Scales", 
+       altr.row.col=FALSE,
+       hide.progress = TRUE)
+```
+#### Cronbach alpha and number of items for 5-point scales:
+```{r, echo = FALSE}
+round(scores_5$alpha[,-1], digits = 2)
+scores_5$n.items[-1]
+```
+
+
+
 
 The following tables use pairs.panels (first fig) and corPlot from psych package.
 
 ```{r correlation_plots, echo = FALSE}
 splom.scales <- responses %>% 
-    select(one_of(c("E4_CarMgt", "E5_DevAsst", "F2_MngCar", "F5_DevAss", 
+    select(one_of(c("C5_CarAdv", "E4_CarMgt", "E5_DevAsst", "F2_MngCar", "F5_DevAss", 
                     "F6_ProcJust", "F7_DistJust", "F12_CareerSat")))
 
 

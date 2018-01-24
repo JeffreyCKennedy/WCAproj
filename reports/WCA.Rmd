@@ -2,11 +2,12 @@
 title: "Womens Career Aspirations"
 author: "Jeff Kennedy"
 date: "23 November 2016"
-output: word_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
 library(knitr)
+library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 3.5, fig.height = 3.5)
 ```
 
@@ -16,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width =
 
 Leaving aside optional questions (e.g., open text responses), this plot shows the number of missing values by respondent. Vertical axis is the number of respondents corresponding to each level of missing data along the horizontal axis.
 ```{r MissingValues, echo=FALSE}
-print(ggplot(responses, aes(Missing)) + geom_histogram(binwidth = 1))
+responses %>% ggplot(aes(MissScalVars)) + geom_histogram(binwidth = 1)
 ```
 
 ## Q2 Importance of job, family, life/leisure

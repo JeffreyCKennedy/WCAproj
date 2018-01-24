@@ -16,6 +16,11 @@
 # names(df)  # lists all the variable names with column numbers, so can reference by number.
 
 
+# Bring in the csv showing all scales and items ---------------------------
+
+# ScalesItems <- read_csv("../data/ScalesItems.csv")
+# View(ScalesItems)
+
 # Data Cleaning -----------------------------------------------------------
 
 
@@ -62,6 +67,16 @@ responses$E4_3_CarMgt <- car::recode(responses$E4_3_CarMgt,"1=1 ; 2=2 ; 3=3 ; 4=
 responses$F14a_1_CarSucc <- car::recode(responses$F14a_1_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
 responses$F14a_2_CarSucc <- car::recode(responses$F14a_2_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
 responses$F14a_3_CarSucc <- car::recode(responses$F14a_3_CarSucc,"1=1 ; 3=2 ; 4=3 ; 5=4 ; 6=5; 7=6; 8=7; else=NA")
+# C5 asks if people willing to do certain things to advance their career (yes, maybe, no, don't know).
+# 8th item is 'other'; The more of the first 7 items endorsed as yes (or maybe), the more ambitious
+# the person is to advance. Recode so that 'yes' becomes '2', 'maybe' is '1', and no & don't know are 0.
+responses$C5_1_CarAdv <- car::recode(responses$C5_1_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_2_CarAdv <- car::recode(responses$C5_2_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_3_CarAdv <- car::recode(responses$C5_3_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_4_CarAdv <- car::recode(responses$C5_4_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_5_CarAdv <- car::recode(responses$C5_5_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_6_CarAdv <- car::recode(responses$C5_6_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
+responses$C5_7_CarAdv <- car::recode(responses$C5_7_CarAdv,"1=2 ; 2=1 ; 3=0 ; 4=0 ; else=NA")
 
 
 # Recode reverse scored variables -----------------------------------------
