@@ -2,9 +2,11 @@
 title: "Careers Output Doc"
 author: "Jeff Kennedy"
 date: "23 January 2018"
-output: 
-  html_document: 
+output:
+  html_document:
     keep_md: yes
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r libraries, include=FALSE}
+library(skimr)
 library(tidyverse)
+library(kableExtra)
 library(sjPlot)
 library(psych)
 library(lubridate)
@@ -36,27 +40,40 @@ source("../munge/03-munge create scale scores.R")
 
 #### Cronbach alpha and number of items for 7-point scales:
 ```{r, echo = FALSE}
-alpha_7 <- round(as.data.frame(scores_7$alpha[,-1]), 2)
-colnames(alpha_7)[colnames(alpha_7)=="scores_7$alpha[, -1]"] <- "alpha"
-sjt.df(alpha_7, 
-       describe = FALSE, 
-       title = "Alpha for 7-point Scales", 
-       altr.row.col=FALSE,
-       hide.progress = TRUE)
-n_items_7 <- round(as.data.frame(scores_7$n.items[-1]), digits = 2)
-colnames(n_items_7)[colnames(alpha_7)=="scores_7$n.items[-1]"] <- "n_items"
-sjt.df(n_items_7, 
-       describe = FALSE, 
-       title = "Number of items in 7-point Scales", 
-       altr.row.col=FALSE,
-       hide.progress = TRUE)
+alpha_7 <- round(scores_7$alpha[,-1], 2)
+# colnames(alpha_7)[colnames(alpha_7)=="scores_7$alpha[, -1]"] <- "alpha"
+# sjt.df(alpha_7, 
+#        describe = FALSE, 
+#        title = "Alpha for 7-point Scales", 
+#        altr.row.col=FALSE,
+#        hide.progress = TRUE)
+n_items_7 <- round(scores_7$n.items[-1], digits = 2)
+# colnames(n_items_7)[colnames(alpha_7)=="scores_7$n.items[-1]"] <- "n_items"
+# sjt.df(n_items_7, 
+#        describe = FALSE, 
+#        title = "Number of items in 7-point Scales", 
+#        altr.row.col=FALSE,
+#        hide.progress = TRUE)
+ScaleNames7 <- dimnames(scores_7$alpha)[[2]][-1]
+tibble(ScaleNames7, alpha_7, n_items_7) %>% 
+    kable("html") %>% 
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 ```
 #### Cronbach alpha and number of items for 5-point scales:
-```{r, echo = FALSE}
-round(scores_5$alpha[,-1], digits = 2)
-scores_5$n.items[-1]
-```
+```{r, echo = FALSE, results = 'asis'}
+alpha_vals <- round(scores_5$alpha[,-1], digits = 2)
+N_items <- scores_5$n.items[-1]
+ScaleNames5 <- dimnames(scores_5$alpha)[[2]][-1]
+tibble(ScaleNames5, alpha_vals, N_items) %>% 
+    kable("html") %>% 
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 
+```
+#### Summary stats for demog vars
+```{r, results = 'asis'}
+skim(responses, Age, Seniority, Educ, TotSal, WkHours, TotDeps) %>% 
+    kable()
+```
 
 
 
@@ -65,7 +82,7 @@ The following tables use pairs.panels (first fig) and corPlot from psych package
 ```{r correlation_plots, echo = FALSE}
 splom.scales <- responses %>% 
     select(one_of(c("C5_CarAdv", "E4_CarMgt", "E5_DevAsst", "F2_MngCar", "F5_DevAss", 
-                    "F6_ProcJust", "F7_DistJust", "F12_CareerSat")))
+                    "F6_ProcJust", "F7_DistJust", "F12_CareerSat", "F14a_CarSucc")))
 
 
 pairs.panels(splom.scales)
@@ -73,5 +90,6 @@ corPlot(splom.scales, main = "Correlations of Main Scales", pval = FALSE,
         numbers = TRUE)
 ```
 
+The package skimr provides tidy one-line summaries of response frequencies.
 
 
