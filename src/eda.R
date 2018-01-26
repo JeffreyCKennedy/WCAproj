@@ -2,6 +2,8 @@
 # load.project()
 # 
 
+View(ScalesItems)
+
 splom.scales <- responses %>% 
     select(one_of(c("E4_CarMgt", "E5_DevAsst", "F2_MngCar", "F5_DevAss", 
                     "F6_ProcJust", "F7_DistJust", "F12_CareerSat")))
@@ -20,6 +22,20 @@ sjt.df(round(as.data.frame(scores_7$n.items[-1]), digits = 2),
        title = "Number of items in 7-point Scales", 
        altr.row.col=TRUE,
        hide.progress = TRUE)
+
+
+# Use sjPlot to produce tables of frequencies -----------------------------
+
+sjp.frq(responses$Age_f, title = "Age", type = "bar", show.na = TRUE)
+sjp.frq(responses$Seniority_f, title = "Seniority", type = "bar", show.na = TRUE)
+sjp.frq(responses$Educ_f, title = "Educ", type = "bar", show.na = TRUE)
+sjp.frq(responses$TotSal_f, title = "Total Salary", type = "bar", show.na = TRUE)
+sjp.frq(responses$WkHours_f, title = "WorkHours", type = "bar", show.na = TRUE)
+sjp.frq(responses$TotDeps, title = "N of Dependents", type = "bar", show.na = TRUE)
+
+# Can also use skimr to produce one-line summaries of non-factor versions:
+skim(responses, Age, Seniority, Educ, TotSal, WkHours, TotDeps)
+
 
 # Generate df with only numeric vars for Nazim (PLS) ----------------------
 

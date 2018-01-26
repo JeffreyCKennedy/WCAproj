@@ -2,27 +2,65 @@
 # Create and run Lavaan model statementa ----------------------------------
 
 # Drops the C2_ prefix, leaving WLB etc for cfa syntax. Keeps it simpler
-cfanames <- map(names(keys.list_5[-1]), .f = ~ str_split(.x, "_")[[1]][2])
+cfanames5 <- map(names(keys.list_5[-1]), .f = ~ str_split(.x, "_")[[1]][2])
 # Creates the model syntax
-modelstmts <- glue('{cfanames} =~ {map(keys.list_5[-1], .f = ~ 
+modelstmts5 <- glue('{cfanames5} =~ {map(keys.list_5[-1], .f = ~ 
                    collapse(.x, sep = " + "))}')
 # Next step - get fit objects for each model
-fitoutput <- map(modelstmts, .f = ~ cfa(.x, data = responses))
+fitoutput5 <- map(modelstmts5, .f = ~ cfa(.x, data = responses))
 # Put everything in a tibble
-lm.output <- tibble(name = cfanames,
-                    model = modelstmts,
-                    fitoutput = fitoutput)
+lm.output5 <- tibble(name = cfanames5,
+                    model = modelstmts5,
+                    fit = fitoutput5)
 
-lm.output[["fitoutput"]]
+# lm.output5[["fit"]]
+# To access individual model, use syntax like:
+# fitMeasures(lm.output5$fit[[1]])
 
-lm.output <- lm.output %>% 
-    mutate(chisq = map_dbl(fitoutput, ~ fitMeasures(.x, "chisq"))) %>% 
-    mutate(df = map_dbl(fitoutput, ~ fitMeasures(.x, "df"))) %>% 
-    mutate(cfi = map_dbl(fitoutput, ~ fitMeasures(.x, "cfi"))) %>% 
-    mutate(rmsea = map_dbl(fitoutput, ~ fitMeasures(.x, "rmsea"))) %>% 
-    mutate(srmr = map_dbl(fitoutput, ~ fitMeasures(.x, "srmr")))
 
-lm.output %>% View()
+
+lm.output5 <- lm.output5 %>% 
+    mutate(chisq = map_dbl(fit, ~ fitMeasures(.x, "chisq"))) %>% 
+    mutate(df = map_dbl(fit, ~ fitMeasures(.x, "df"))) %>% 
+    mutate(ntotal = map_dbl(fit, ~ fitMeasures(.x, "ntotal"))) %>% 
+    mutate(cfi = map_dbl(fit, ~ fitMeasures(.x, "cfi"))) %>%
+    mutate(tli = map_dbl(fit, ~ fitMeasures(.x, "tli"))) %>% 
+    mutate(rmsea = map_dbl(fit, ~ fitMeasures(.x, "rmsea"))) %>% 
+    mutate(srmr = map_dbl(fit, ~ fitMeasures(.x, "srmr")))
+
+lm.output5 %>% 
+    select(-one_of(c("model", "fit"))) %>% 
+    kable(digits = 3, 
+          caption = "CFA fit for scales using 5-point rating scale")
+
+# Scales with 7 point rating scales:
+cfanames7 <- map(names(keys.list_7[-1]), .f = ~ str_split(.x, "_")[[1]][2])
+# Creates the model syntax
+modelstmts7 <- glue('{cfanames7} =~ {map(keys.list_7[-1], .f = ~ 
+                   collapse(.x, sep = " + "))}')
+# Next step - get fit objects for each model
+fitoutput7 <- map(modelstmts7, .f = ~ cfa(.x, data = responses))
+# Put everything in a tibble
+lm.output7 <- tibble(name = cfanames7,
+                     model = modelstmts7,
+                     fit = fitoutput7)
+
+lm.output7[["fit"]]
+
+
+lm.output7 <- lm.output7 %>% 
+    mutate(chisq = map_dbl(fit, ~ fitMeasures(.x, "chisq"))) %>% 
+    mutate(df = map_dbl(fit, ~ fitMeasures(.x, "df"))) %>% 
+    mutate(ntotal = map_dbl(fit, ~ fitMeasures(.x, "ntotal"))) %>% 
+    mutate(cfi = map_dbl(fit, ~ fitMeasures(.x, "cfi"))) %>% 
+    mutate(tli = map_dbl(fit, ~ fitMeasures(.x, "tli"))) %>% 
+    mutate(rmsea = map_dbl(fit, ~ fitMeasures(.x, "rmsea"))) %>% 
+    mutate(srmr = map_dbl(fit, ~ fitMeasures(.x, "srmr")))
+
+lm.output7 %>% 
+    select(-one_of(c("model", "fit"))) %>% 
+    kable(digits = 3, 
+          caption = "CFA fit for scales using 7-point rating scale")
 
 # map(lm.output$fitoutput, ~ summary(.x))
 # map(names(lm.output), ~ print(lm.output[[.x]]))

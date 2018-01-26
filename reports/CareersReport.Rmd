@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r libraries, include=FALSE}
 library(skimr)
 library(tidyverse)
-library(kableExtra)
+library(kableExtra) # For formatting tables via Kable
 library(sjPlot)
 library(psych)
 library(lubridate)
@@ -69,6 +69,67 @@ tibble(ScaleNames5, alpha_vals, N_items) %>%
     kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
 
 ```
+
+#### CFA chi-sq and fit values for scales:
+```{r CFA5, results = 'asis', echo = FALSE, warning = FALSE, message=FALSE}
+cfanames5 <- map(names(keys.list_5[-1]), .f = ~ str_split(.x, "_")[[1]][2])
+# Creates the model syntax
+modelstmts5 <- glue('{cfanames5} =~ {map(keys.list_5[-1], .f = ~ 
+                   collapse(.x, sep = " + "))}')
+# Next step - get fit objects for each model
+fitoutput5 <- map(modelstmts5, .f = ~ cfa(.x, data = responses))
+
+# Put everything in a tibble
+lm.output5 <- tibble(name = cfanames5,
+                    model = modelstmts5,
+                    fit = fitoutput5)
+
+lm.output5 <- lm.output5 %>% 
+    mutate(chisq = map_dbl(fit, ~ fitMeasures(.x, "chisq"))) %>% 
+    mutate(df = map_dbl(fit, ~ fitMeasures(.x, "df"))) %>% 
+    mutate(ntotal = map_dbl(fit, ~ fitMeasures(.x, "ntotal"))) %>%
+    mutate(cfi = map_dbl(fit, ~ fitMeasures(.x, "cfi"))) %>% 
+    mutate(tli = map_dbl(fit, ~ fitMeasures(.x, "tli"))) %>%
+    mutate(rmsea = map_dbl(fit, ~ fitMeasures(.x, "rmsea"))) %>% 
+    mutate(srmr = map_dbl(fit, ~ fitMeasures(.x, "srmr")))
+
+lm.output5 %>% 
+    select(-one_of(c("model", "fit"))) %>% 
+    kable("html", digits = 3, 
+          caption = "CFA fit for scales using 5-point rating scale") %>% 
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
+
+
+```{r CFA7, results = 'asis', echo = FALSE, warning = FALSE, message=FALSE}
+cfanames7 <- map(names(keys.list_7[-1]), .f = ~ str_split(.x, "_")[[1]][2])
+# Creates the model syntax
+modelstmts7 <- glue('{cfanames7} =~ {map(keys.list_7[-1], .f = ~ 
+                   collapse(.x, sep = " + "))}')
+# Next step - get fit objects for each model
+fitoutput7 <- map(modelstmts7, .f = ~ cfa(.x, data = responses))
+
+# Put everything in a tibble
+lm.output7 <- tibble(name = cfanames7,
+                    model = modelstmts7,
+                    fit = fitoutput7)
+
+lm.output7 <- lm.output7 %>% 
+    mutate(chisq = map_dbl(fit, ~ fitMeasures(.x, "chisq"))) %>% 
+    mutate(df = map_dbl(fit, ~ fitMeasures(.x, "df"))) %>%
+    mutate(ntotal = map_dbl(fit, ~ fitMeasures(.x, "ntotal"))) %>%
+    mutate(cfi = map_dbl(fit, ~ fitMeasures(.x, "cfi"))) %>% 
+    mutate(tli = map_dbl(fit, ~ fitMeasures(.x, "tli"))) %>%
+    mutate(rmsea = map_dbl(fit, ~ fitMeasures(.x, "rmsea"))) %>% 
+    mutate(srmr = map_dbl(fit, ~ fitMeasures(.x, "srmr")))
+
+lm.output7 %>% 
+    select(-one_of(c("model", "fit"))) %>% 
+    kable("html", digits = 3, 
+          caption = "CFA fit for scales using 7-point rating scale") %>% 
+    kable_styling(bootstrap_options = c("striped", "hover"), full_width = FALSE)
+```
+
 #### Summary stats for demog vars
 ```{r, results = 'asis'}
 skim(responses, Age, Seniority, Educ, TotSal, WkHours, TotDeps) %>% 

@@ -18,7 +18,7 @@
 
 # Bring in the csv showing all scales and items ---------------------------
 
-# ScalesItems <- read_csv("../data/ScalesItems.csv")
+ScalesItems <- read_csv(here("data/ScalesItems.csv"))
 # View(ScalesItems)
 
 # Data Cleaning -----------------------------------------------------------

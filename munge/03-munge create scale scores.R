@@ -88,27 +88,41 @@ responses$Marital_f <- as.factor(responses$Marital)
 levels(responses$Marital_f) <- c("Married", "Single", "Other")
 
 responses$Ethnic_f <- as.factor(responses$Ethnic)
-levels(responses$Ethnic_f) <- c("NZ European", "Maori", "Asian", "Pacific", "ME.LA.A", "Other")
+levels(responses$Ethnic_f) <- c("NZ European", "Maori", "Asian", "Pacific", 
+                                "ME.LA.A", "Other")
 
 responses$JobStatus_f <- as.factor(responses$JobStatus)
-levels(responses$JobStatus_f) <- c("Permanent", "Temp.Contract", "Self-employed", "Other")
+levels(responses$JobStatus_f) <- c("Permanent", "Temp.Contract", "Self-employed", 
+                                   "Other")
 
 responses$Seniority_f <- as.factor(responses$Seniority)
-levels(responses$Seniority_f) <- c("Director", "ExecMgt", "SnrMgt", "MidMgt", "1stLvlMgt", "Super", "Other", "None")
+levels(responses$Seniority_f) <- c("Director", "ExecMgt", "SnrMgt", "MidMgt", 
+                                   "1stLvlMgt", "Super", "Other", "None")
 
 responses$Age_f <- as.factor(responses$Age)
 levels(responses$Age_f) <- c("15-24", "25-34", "35-44", "45-54", "55-64", "65+")
 
+
+
 responses$Educ_f <- as.factor(responses$Educ)
-levels(responses$Educ_f) <- c("PhD", "Masters", "PG Dip", "Bachelor", "Dip/Cert", "High School", "Other")
+levels(responses$Educ_f) <- c("PhD", "Masters", "PG Dip", "Bachelor", "Dip/Cert",
+                              "High School", "Other")
 
 responses$C6_PrimCareResp_f <- as.factor(responses$C6_PrimCareResp)
-levels(responses$C6_PrimCareResp_f) <- c("Spouse", "Other Family", "Paid Care", "Friends", "Other", "It Depends", "Equal Share", "Me")
+levels(responses$C6_PrimCareResp_f) <- c("Spouse", "Other Family", "Paid Care", 
+                                         "Friends", "Other", "It Depends", "Equal Share", "Me")
 
 responses$C7_PrimRespHHold_f <- as.factor(responses$C7_PrimRespHHold)
 # Note: noone answered '4' so leave out 'Friends' level
-levels(responses$C7_PrimRespHHold_f) <- c("Spouse", "Other Family", "Paid Care", "Friends", "Other", "It Depends", "Equal Share", "Me")
+levels(responses$C7_PrimRespHHold_f) <- c("Spouse", "Other Family", "Paid Care", 
+                                          "Friends", "Other", "It Depends", 
+                                          "Equal Share", "Me")
 
 responses$TotSal_f <- as.factor(responses$TotSal)
-levels(responses$TotSal_f) <- c("Under $30k", "$30k-$50k", "$50k-$80k", "$80k-$100k", "$100k-$250k", "$250k-$500k", "Over $500k")
+levels(responses$TotSal_f) <- c("Under $30k", "$30k-$50k", "$50k-$80k", 
+                                "$80k-$100k", "$100k-$250k", "$250k-$500k", 
+                                "Over $500k")
+
+responses$WkHours_f <- as.factor(responses$WkHours)
+levels(responses$WkHours_f) <- c("< 20 hrs", "20-29", "30-39", "40-49", "50-59", "60+")
 
