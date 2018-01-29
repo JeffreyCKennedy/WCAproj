@@ -1,18 +1,30 @@
 Cronbach alpha for 7-point scales:
-      ID D3_CareerSE F13_LifeSat F14a_CarSucc
-alpha  1       0.697       0.887        0.842
+ D3_CareerSE  F13_LifeSat F14a_CarSucc 
+        0.79         0.89         0.84 
 
 
 Number of items in 7-point scales:
+ D3_CareerSE  F13_LifeSat F14a_CarSucc 
+           4            5            3 
 
 
 Cronbach alpha for 5-point scales:
-      ID C2_WLB D1_PersCirc D2_Abilities E1_CultFit E2_Network E3_Mentor E4_CarMgt E5_DevAsst
-alpha  1  0.774        0.63        0.866      0.869      0.854     0.875     0.859      0.919
-      E6_GeoMob F2_MngCar F3_Relships F4_Mentor F5_DevAss F6_ProcJust F7_DistJust F8_Empower F9_DevAss
-alpha     0.803     0.823       0.818     0.942     0.895       0.752       0.813      0.805     0.872
-      F10_Turnover F11_JobSat F12_CareerSat
-alpha        0.939      0.871         0.878
+       C2_WLB   D1_PersCirc  D2_Abilities    E1_CultFit    E2_Network     E3_Mentor 
+         0.77          0.63          0.87          0.87          0.85          0.87 
+    E4_CarMgt    E5_DevAsst     E6_GeoMob     F2_MngCar   F3_Relships     F4_Mentor 
+         0.86          0.92          0.80          0.82          0.82          0.94 
+    F5_DevAss   F6_ProcJust   F7_DistJust    F8_Empower     F9_DevAss  F10_Turnover 
+         0.89          0.75          0.81          0.81          0.87          0.94 
+   F11_JobSat F12_CareerSat 
+         0.87          0.88 
 
 
 Number of items in 5-point scales:
+       C2_WLB   D1_PersCirc  D2_Abilities    E1_CultFit    E2_Network     E3_Mentor 
+            5             5             8             7             2             4 
+    E4_CarMgt    E5_DevAsst     E6_GeoMob     F2_MngCar   F3_Relships     F4_Mentor 
+            3             7             3             4             4             8 
+    F5_DevAss   F6_ProcJust   F7_DistJust    F8_Empower     F9_DevAss  F10_Turnover 
+            4             5             5             4             3             4 
+   F11_JobSat F12_CareerSat 
+            5             5 

@@ -126,3 +126,5 @@ levels(responses$TotSal_f) <- c("Under $30k", "$30k-$50k", "$50k-$80k",
 responses$WkHours_f <- as.factor(responses$WkHours)
 levels(responses$WkHours_f) <- c("< 20 hrs", "20-29", "30-39", "40-49", "50-59", "60+")
 
+responses$F14b_CarSucc_f <- as.factor(responses$F14b_CarSucc)
+levels(responses$F14b_CarSucc_f) <- c("Behind", "On", "Ahead")

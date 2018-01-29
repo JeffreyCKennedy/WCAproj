@@ -131,11 +131,41 @@ m_carsuc <- lm(F14b_CarSucc ~ Age + Seniority + Marital +
                data = responses_logistic)
 summary(m_carsuc)
 
+
+# Explore relationship graphically ----------------------------------------
+
+# This is a good plot, showing distribution of behind/on/ahead of schedule by
+# seniority (director to supervisor) separately for each age group.
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = Seniority_f, fill = F14b_CarSucc_f)) +
+    facet_wrap(~ Age_f) +
+    theme(axis.text.x = element_text(angle = 30, vjust = 1, hjust = 1)) +
+    labs(x = "Job Seniority", y = "Frequency", fill = "Career\nSuccess") +
+    labs(title = "Self-Rated Career Success vs Seniority (Grouped by Age)")
+
+
 responses_logistic %>% 
     ggplot(aes(Seniority_f, F14b_CarSucc_f, colour = Age_f)) +
     geom_jitter(size = 4, height = .2, width = .2, alpha= .6)
+# could include shape = as.factor(TotDeps) in aes, but doesn't show many differences.
 
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = F14b_CarSucc_f, fill = Age_f),
+             position = "fill")
     
-    
-    
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = F14b_CarSucc_f, fill = Age_f),
+             position = "dodge")  
+
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = F14b_CarSucc_f, fill = Age_f),
+             position = "dodge") +
+    facet_wrap(~ TotDeps)
+
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = F14b_CarSucc_f, fill = Age_f),
+             position = "dodge") +
+    facet_wrap(~ Seniority_f)
+
+
 
