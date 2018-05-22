@@ -6,7 +6,7 @@ str(responses$Age_f)
 
 scales_logistic <- c("F14b_CarSucc", "F14b_CarSucc_f", "Age", "Seniority", "Educ", "TotSal", 
                      "TotDeps", "Marital", "Age_f", "Seniority_f", "Educ_f", 
-                     "TotSal_f", "Marital_f")
+                     "TotSal_f", "Marital_f", "D3_CareerSE")
 responses_logistic <- responses %>% 
     dplyr::select(one_of(scales_logistic)) %>% 
     filter(!is.na(F14b_CarSucc_f)) %>% 
@@ -27,9 +27,31 @@ sapply(responses_logistic,function(x) sum(is.na(x)))
 
 m <- polr(F14b_CarSucc_f ~ Age + Seniority + Educ + TotSal + TotDeps + Marital,
           data = responses_logistic, na.action = "na.omit", Hess = TRUE)
+# Add in an interaction term for Age and Seniority:
+m2 <- polr(F14b_CarSucc_f ~ Age * Seniority + Educ + TotSal + TotDeps + Marital,
+          data = responses_logistic, na.action = "na.omit", Hess = TRUE)
+# Include interaction only, not main effects
+m3 <- polr(F14b_CarSucc_f ~ Age : Seniority + Educ + TotSal + TotDeps + Marital,
+           data = responses_logistic, na.action = "na.omit", Hess = TRUE)
+# Model m, but with CareerSE included:
+m4 <- polr(F14b_CarSucc_f ~ Age + Seniority + D3_CareerSE + Educ + TotSal + TotDeps + Marital,
+          data = responses_logistic, na.action = "na.omit", Hess = TRUE)
 
 summary(m, digits = 3)
 (ci <- confint(m))
+
+summary(m2, digits = 3) # With interaction and main effects, nothing is significant.
+(ci <- confint(m2))
+
+summary(m3, digits = 3) # Without main effects, Educ & interaction are significant.
+(ci <- confint(m3))
+
+summary(m4, digits = 3) # Without main effects, Educ & interaction are significant.
+(ci <- confint(m4))
+
+anova(m3, m)
+anova(m2, m)
+
 
 # The coefficients from the model can be somewhat difficult to interpret because
 # they are scaled in terms of logs. Another way to interpret logistic regression
@@ -143,6 +165,13 @@ responses_logistic %>% ggplot() +
     labs(x = "Job Seniority", y = "Frequency", fill = "Career\nSuccess") +
     labs(title = "Self-Rated Career Success vs Seniority (Grouped by Age)")
 
+# Same as above, but with horizontal bar plots:
+responses_logistic %>% ggplot() +
+    geom_bar(aes(x = Seniority_f, fill = F14b_CarSucc_f)) +
+    facet_wrap(~ Age_f) +
+    labs(x = "Job Seniority", y = "Frequency", fill = "Career\nSuccess") +
+    labs(title = "Self-Rated Career Success vs Seniority (Grouped by Age)") +
+    coord_flip()
 
 responses_logistic %>% 
     ggplot(aes(Seniority_f, F14b_CarSucc_f, colour = Age_f)) +
@@ -167,5 +196,8 @@ responses_logistic %>% ggplot() +
              position = "dodge") +
     facet_wrap(~ Seniority_f)
 
-
-
+mpg %>% ggplot(mapping = aes(x=displ, y= hwy)) + 
+    geom_point(mapping = aes(colour = class)) + 
+    geom_smooth(
+        data = filter(mpg, class == "subcompact"), se = FALSE
+    )

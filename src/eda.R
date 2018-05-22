@@ -71,4 +71,14 @@ sink(file.path("output", "Item Descriptives.txt"))
      print(item.summaries7)
      sink()
 
-     
+
+# Correlations ------------------------------------------------------------
+
+# num.responses <- responses[ , purrr::map_lgl(responses, is.numeric)]
+# names(num.responses)
+# correlations <- corr.test(num.responses, use = "pairwise", method = "pearson")
+# corr.test(responses$F10_Turnover, responses$F12_CareerSat, use = "pairwise", method = "pearson")
+
+corr.vars <- responses %>% select(one_of(c("F10_Turnover","F12_CareerSat")))
+corr.test(corr.vars, use = "pairwise", method = "pearson")
+    
